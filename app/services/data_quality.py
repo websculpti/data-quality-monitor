@@ -10,7 +10,7 @@ def detect_missing_values(df: pd.DataFrame) -> dict:
    
     missing={}
     for column in df.columns:
-        missing[column]=df[column].isnull().sum()
+        missing[column]=int(df[column].isnull().sum())
 
     return missing 
 
@@ -40,7 +40,7 @@ def detect_outlier(df: pd.DataFrame) -> dict :
 
     for col in numeric_cols :
         Q1 = df[col].quantile(0.25)
-        Q3 = df[col].qunatile(0.75)
+        Q3 = df[col].quantile(0.75)
         IQR = Q3 - Q1
 
         lb = Q1 - 1.5 *IQR
@@ -48,19 +48,19 @@ def detect_outlier(df: pd.DataFrame) -> dict :
 
         outliers =len( df[(df[col] < lb) | (df[col] > ub)] )
 
-        res[col] = outliers
+        res[col] = int(outliers)
 
     return res
 
 # function for the metadata of dataset
- def generate_stats(df: pd.DataFrame) -> dict :
-     return {
+def generate_stats(df: pd.DataFrame) -> dict:
+    return {
         "rows": int(df.shape[0]),
         "columns": int(df.shape[1]),
         "column_names": list( df.columns),
         "numeric_columns": list(df.select_dtypes(include=['number']).columns),
         "categorical_columns": list(df.select_dtypes(exclude=['number']).columns)
-     }
+    }
 
 def run_data_quality_checks(df : pd.DataFrame) -> dict:
     logger.info("data quality service done successfully  ")
