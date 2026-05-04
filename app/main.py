@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-#from app.routes.health import router as health_router
+from app.routes.health import router as health_router
 from app.routes.upload import router as upload_router
 from app.routes.analyze import router as analyze_router
 from app.routes.report import router as report_router
@@ -19,7 +19,7 @@ app = FastAPI(
 
 # Register routes
 
-#app.include_router(health_router)
+app.include_router(health_router)
 app.include_router(upload_router)
 app.include_router(analyze_router)
 app.include_router(report_router)
