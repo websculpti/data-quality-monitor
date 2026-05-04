@@ -7,7 +7,7 @@ logger=get_logger(__name__)
 
 router=APIRouter()
 
-@router.get('/analyze/{file_id}')
+@router.post('/analyze/{file_id}')
 def analyze(file_id :str):
     data=load_data(file_id)
 
