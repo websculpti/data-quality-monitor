@@ -25,8 +25,6 @@ app.include_router(analyze_router)
 app.include_router(report_router)
 
 
-
-
 @app.on_event("startup")
 def startup_event():
     logger.info("Data Quality Monitor API started successfully")
